@@ -4,42 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zhongwei's Docs</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
 :root {
   --bg: #fafafa;
-  --surface: #ffffff;
+  --surface: #fff;
   --border: #e5e5e5;
-  --border-light: #f0f0f0;
   --text: #171717;
   --text-secondary: #737373;
   --text-tertiary: #a3a3a3;
   --purple: #7c3aed;
   --purple-light: #ede9fe;
-  --purple-bg: #f5f3ff;
   --blue: #2563eb;
   --blue-light: #dbeafe;
-  --blue-bg: #eff6ff;
   --green: #059669;
   --green-light: #d1fae5;
   --amber: #d97706;
   --amber-light: #fef3c7;
-  --red: #dc2626;
-  --red-light: #fee2e2;
   --cyan: #0891b2;
   --cyan-light: #cffafe;
   --slate: #475569;
   --slate-light: #f1f5f9;
   --radius: 12px;
-  --radius-sm: 8px;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.04);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / .05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / .06), 0 1px 2px -1px rgb(0 0 0 / .04);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / .05), 0 2px 4px -2px rgb(0 0 0 / .04);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / .05), 0 4px 6px -4px rgb(0 0 0 / .04);
 }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
@@ -51,11 +44,10 @@ body {
 }
 
 /* ── Navigation ── */
-nav {
+.nav {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(255,255,255,0.82);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255,255,255,.84);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
 }
 .nav-inner {
@@ -63,292 +55,158 @@ nav {
   height: 56px;
   display: flex; align-items: center; justify-content: space-between;
 }
-.nav-logo { font-weight: 700; font-size: 1.05rem; color: var(--text); text-decoration: none; letter-spacing: -0.01em; }
+.nav-logo { font-weight: 700; font-size: 1.05rem; color: var(--text); text-decoration: none; letter-spacing: -.01em; }
 .nav-logo span { color: var(--purple); }
 .nav-links { display: flex; gap: 24px; list-style: none; }
 .nav-links a {
   color: var(--text-secondary); text-decoration: none;
-  font-size: 0.9rem; font-weight: 500;
-  transition: color 0.15s;
+  font-size: .9rem; font-weight: 500; transition: color .15s;
 }
 .nav-links a:hover { color: var(--text); }
 
 /* ── Hero ── */
 .hero {
-  padding: 96px 32px 80px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  padding: 100px 32px 72px; text-align: center;
+  position: relative; overflow: hidden;
 }
 .hero::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%; transform: translateX(-50%);
-  width: 800px; height: 600px;
+  content: ''; position: absolute;
+  top: -40%; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 700px;
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(124,58,237,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 50%, rgba(37,99,235,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 80%, rgba(8,145,178,0.04) 0%, transparent 50%);
+    radial-gradient(ellipse at 30% 20%, rgba(124,58,237,.10) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 50%, rgba(37,99,235,.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 80%, rgba(8,145,178,.05) 0%, transparent 50%);
   pointer-events: none;
 }
 .hero-content { position: relative; z-index: 1; }
 .hero h1 {
-  font-size: 3rem; font-weight: 800;
-  letter-spacing: -0.04em; line-height: 1.15;
-  color: var(--text);
-  margin-bottom: 16px;
+  font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800;
+  letter-spacing: -.04em; line-height: 1.12;
+  color: var(--text); margin-bottom: 16px;
 }
-.hero h1 span {
+.hero h1 .gradient {
   background: linear-gradient(135deg, #7c3aed 0%, #6366f1 40%, #0891b2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.hero p {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  max-width: 500px;
-  margin: 0 auto 32px;
-}
-.hero-stats {
-  display: flex; justify-content: center; gap: 40px;
-  margin-top: 8px;
-}
-.hero-stat {
-  text-align: center;
-}
-.hero-stat .num {
-  font-size: 1.75rem; font-weight: 700;
-  color: var(--text); letter-spacing: -0.02em;
-}
-.hero-stat .label {
-  font-size: 0.82rem; color: var(--text-tertiary);
-  margin-top: 2px;
-}
+.hero p { font-size: 1.1rem; color: var(--text-secondary); max-width: 520px; margin: 0 auto 36px; line-height: 1.65; }
+.hero-stats { display: flex; justify-content: center; gap: 48px; }
+.hero-stat { text-align: center; }
+.hero-stat .num { font-size: 1.8rem; font-weight: 700; color: var(--text); letter-spacing: -.02em; }
+.hero-stat .label { font-size: .82rem; color: var(--text-tertiary); margin-top: 2px; }
 
-/* ── Container ── */
+/* ── Layout ── */
 .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
-
-/* ── Section Title ── */
-.section-header {
-  margin-bottom: 32px;
-}
+.section-space { margin-bottom: 80px; }
 .section-label {
-  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--purple);
-  margin-bottom: 8px;
+  font-size: .72rem; font-weight: 700; letter-spacing: .10em;
+  text-transform: uppercase; color: var(--purple); margin-bottom: 6px;
 }
 .section-title {
-  font-size: 1.5rem; font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text);
+  font-size: 1.55rem; font-weight: 700; letter-spacing: -.02em;
+  color: var(--text); margin-bottom: 32px;
 }
 
-/* ── Project Card (large) ── */
-.project-hero {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 40px;
+/* ── Project Intro Card ── */
+.project-intro {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 36px 40px;
+  display: flex; gap: 28px; align-items: flex-start;
   box-shadow: var(--shadow);
-  transition: box-shadow 0.3s, border-color 0.3s;
+  margin-bottom: 24px;
 }
-.project-hero:hover {
-  box-shadow: var(--shadow-lg);
-  border-color: #d4d4d4;
-}
-.project-hero-inner {
-  padding: 40px;
-  display: flex; gap: 32px; align-items: flex-start;
-}
-.project-icon-wrap {
-  width: 64px; height: 64px;
-  border-radius: 16px;
+.project-icon {
+  width: 60px; height: 60px; border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.8rem;
-  flex-shrink: 0;
+  font-size: 1.6rem; flex-shrink: 0;
   box-shadow: var(--shadow-sm);
 }
-.project-icon-wrap.agent {
-  background: linear-gradient(135deg, #f5f3ff, #ede9fe);
-  border: 1px solid #ddd6fe;
-}
-.project-icon-wrap.vscode {
-  background: linear-gradient(135deg, #eff6ff, #dbeafe);
-  border: 1px solid #bfdbfe;
-}
-.project-meta h2 {
-  font-size: 1.4rem; font-weight: 700;
-  letter-spacing: -0.02em; margin-bottom: 6px;
-}
-.project-meta h2 a { color: var(--text); text-decoration: none; }
-.project-meta h2 a:hover { color: var(--purple); }
-.project-meta .desc {
-  color: var(--text-secondary);
-  font-size: 0.92rem;
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-.project-meta .meta-row {
-  display: flex; gap: 20px; flex-wrap: wrap;
-  font-size: 0.82rem; color: var(--text-tertiary);
-}
-.project-meta .meta-row span { display: flex; align-items: center; gap: 4px; }
+.project-icon.agent  { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border: 1px solid #ddd6fe; }
+.project-icon.vscode { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; }
+.project-info h2 { font-size: 1.35rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 4px; }
+.project-info h2 a { color: var(--text); text-decoration: none; }
+.project-info h2 a:hover { color: var(--purple); }
+.project-info .desc { color: var(--text-secondary); font-size: .9rem; line-height: 1.65; margin-bottom: 10px; max-width: 640px; }
+.project-info .meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: .8rem; color: var(--text-tertiary); }
+.project-info .meta span { display: flex; align-items: center; gap: 4px; }
+
 .pill {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 0.72rem; font-weight: 600;
-  background: var(--purple-light);
-  color: var(--purple);
-  margin-right: 4px;
+  display: inline-block; padding: 3px 10px; border-radius: 999px;
+  font-size: .7rem; font-weight: 600;
+  background: var(--purple-light); color: var(--purple);
+  margin-right: 4px; margin-top: 4px;
 }
-.pill.blue { background: var(--blue-light); color: var(--blue); }
+.pill.blue  { background: var(--blue-light); color: var(--blue); }
 .pill.green { background: var(--green-light); color: var(--green); }
 .pill.amber { background: var(--amber-light); color: var(--amber); }
 
 /* ── Category Grid ── */
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
 }
 .category-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 24px;
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+  transition: box-shadow .2s, border-color .2s, transform .2s;
 }
 .category-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: #d4d4d4;
-  transform: translateY(-1px);
+  box-shadow: var(--shadow-md); border-color: #d4d4d4;
+  transform: translateY(-2px);
 }
-.category-card .cat-icon {
-  width: 36px; height: 36px;
-  border-radius: 10px;
+.cat-icon {
+  width: 34px; height: 34px; border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; margin-bottom: 12px;
+  font-size: .95rem; margin-bottom: 10px;
 }
-.cat-icon.ai      { background: var(--purple-light); }
-.cat-icon.setup   { background: var(--blue-light); }
-.cat-icon.edit    { background: var(--cyan-light); }
-.cat-icon.remote  { background: var(--green-light); }
-.cat-icon.lang    { background: var(--amber-light); }
-.cat-icon.tools   { background: var(--slate-light); }
-.cat-icon.ref     { background: var(--red-light); }
+.cat-icon.purple { background: var(--purple-light); }
+.cat-icon.blue   { background: var(--blue-light); }
+.cat-icon.cyan   { background: var(--cyan-light); }
+.cat-icon.green  { background: var(--green-light); }
+.cat-icon.amber  { background: var(--amber-light); }
+.cat-icon.slate  { background: var(--slate-light); }
 
-.category-card h3 {
-  font-size: 0.95rem; font-weight: 700;
-  margin-bottom: 4px;
-  color: var(--text);
-}
-.category-card .cat-desc {
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
-  margin-bottom: 12px;
-}
-.category-card ul {
-  list-style: none;
-  display: flex; flex-direction: column; gap: 2px;
-}
+.category-card h3 { font-size: .92rem; font-weight: 700; margin-bottom: 2px; color: var(--text); }
+.category-card .cat-desc { font-size: .78rem; color: var(--text-tertiary); margin-bottom: 10px; }
+.category-card ul { list-style: none; display: flex; flex-direction: column; gap: 1px; }
 .category-card ul li a {
-  display: block;
-  padding: 4px 0;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  text-decoration: none;
-  border-radius: 4px;
-  transition: color 0.15s;
+  display: block; padding: 4px 0;
+  font-size: .84rem; color: var(--text-secondary);
+  text-decoration: none; border-radius: 4px;
+  transition: color .15s;
 }
-.category-card ul li a:hover {
-  color: var(--purple);
-}
-
-/* ── Simple link list ── */
-.link-list {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 4px 12px;
-  margin-top: 24px;
-}
-.link-list li a {
-  display: block; padding: 6px 10px;
-  border-radius: 6px;
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 0.86rem;
-  transition: background 0.15s, color 0.15s;
-}
-.link-list li a:hover {
-  background: var(--purple-bg);
-  color: var(--purple);
-}
-
-/* ── Expand / Collapse ── */
-.expand-section {
-  border-top: 1px solid var(--border-light);
-  padding: 28px 40px;
-}
-.expand-toggle {
-  background: none; border: none;
-  font-size: 0.85rem; font-weight: 600;
-  color: var(--text-secondary); cursor: pointer;
-  display: flex; align-items: center; gap: 6px;
-  padding: 0;
-  transition: color 0.15s;
-}
-.expand-toggle:hover { color: var(--text); }
-.expand-toggle .arrow {
-  display: inline-block;
-  transition: transform 0.2s;
-  font-size: 0.7rem;
-}
-.expand-toggle.open .arrow { transform: rotate(90deg); }
-.expand-content { display: none; margin-top: 20px; }
-.expand-content.show { display: block; }
+.category-card ul li a:hover { color: var(--purple); }
 
 /* ── Footer ── */
-footer {
-  text-align: center;
-  padding: 64px 32px 40px;
-  color: var(--text-tertiary);
-  font-size: 0.82rem;
+.footer {
+  text-align: center; padding: 72px 32px 40px;
+  color: var(--text-tertiary); font-size: .82rem;
 }
-footer a { color: var(--text-secondary); text-decoration: none; }
-footer a:hover { color: var(--text); }
-.footer-divider {
-  width: 40px; height: 1px;
-  background: var(--border);
-  margin: 0 auto 24px;
-}
+.footer-line { width: 40px; height: 1px; background: var(--border); margin: 0 auto 24px; }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text); }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .hero { padding: 56px 20px 48px; }
-  .hero h1 { font-size: 2rem; }
-  .hero-stats { gap: 24px; }
-  .project-hero-inner { padding: 24px; flex-direction: column; gap: 16px; }
-  .expand-section { padding: 20px 24px; }
+  .hero { padding: 64px 20px 48px; }
+  .hero-stats { gap: 28px; }
+  .hero-stat .num { font-size: 1.4rem; }
+  .project-intro { padding: 24px; flex-direction: column; gap: 16px; }
   .category-grid { grid-template-columns: 1fr; }
-  .link-list { grid-template-columns: 1fr; }
+  .section-space { margin-bottom: 48px; }
 }
 @media (max-width: 480px) {
   .container { padding: 0 16px; }
   .nav-inner { padding: 0 16px; }
-  .hero h1 { font-size: 1.6rem; }
-  .project-hero-inner { padding: 20px; }
+  .project-intro { padding: 20px; }
 }
 </style>
 </head>
 <body>
 
-<nav>
+<nav class="nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo"><span>@</span>zhongweidee</a>
     <ul class="nav-links">
@@ -361,8 +219,8 @@ footer a:hover { color: var(--text); }
 
 <header class="hero">
   <div class="hero-content">
-    <h1><span>Zhongwei's</span> Docs</h1>
-    <p>技术文档、论文翻译、知识整理 —— 做中文世界最好的技术参考</p>
+    <h1><span class="gradient">Zhongwei's</span> Docs</h1>
+    <p>技术文档、论文翻译、AI 知识整理 &mdash; 用中文呈现高质量技术内容</p>
     <div class="hero-stats">
       <div class="hero-stat"><div class="num">300+</div><div class="label">篇文档</div></div>
       <div class="hero-stat"><div class="num">2</div><div class="label">个知识库</div></div>
@@ -373,250 +231,215 @@ footer a:hover { color: var(--text); }
 
 <main class="container">
 
-  <!-- ============================================================ -->
-  <!--  AI Agent 知识库                                               -->
-  <!-- ============================================================ -->
-  <section id="agent" style="margin-bottom: 64px;">
-    <div class="section-header">
-      <div class="section-label">Project 01</div>
-      <div class="section-title">AI Agent 知识库</div>
-    </div>
+  <!-- ======================================== -->
+  <!--  AI Agent 知识库                          -->
+  <!-- ======================================== -->
+  <section id="agent" class="section-space">
+    <div class="section-label">Project 01</div>
+    <div class="section-title">AI Agent 知识库</div>
 
-    <div class="project-hero">
-      <div class="project-hero-inner">
-        <div class="project-icon-wrap agent">🤖</div>
-        <div class="project-meta" style="flex:1">
-          <h2><a href="https://zhongweidee.github.io/ai-agent-knowledge/" target="_blank">AI Agent 知识库</a></h2>
-          <p class="desc">系统性整理 AI Agent 领域的经典论文翻译、框架对比、实战教程与学习路线。从李飞飞的综述到 Anthropic 的工程实践，帮你建立 Agent 领域的完整知识体系。</p>
-          <div class="meta-row">
-            <span>📄 10 篇</span>
-            <span>📂 5 个专题</span>
-            <span>🔄 持续更新</span>
-          </div>
+    <div class="project-intro">
+      <div class="project-icon agent">🤖</div>
+      <div class="project-info">
+        <h2><a href="https://zhongweidee.github.io/ai-agent-knowledge/">AI Agent 知识库</a></h2>
+        <p class="desc">系统性整理 AI Agent 领域的经典论文翻译、框架对比、实战教程与学习路线。从李飞飞综述到 Anthropic 工程实践，建立 Agent 领域完整知识体系。</p>
+        <div class="meta">
+          <span>📄 10 篇文章</span>
+          <span>📂 5 个专题</span>
+          <span>🔄 持续更新</span>
         </div>
       </div>
+    </div>
 
-      <div class="expand-section">
-        <button class="expand-toggle" onclick="toggleSection(this,'agent-expand')">
-          <span class="arrow">▶</span> 浏览全部文章
-        </button>
-        <div class="expand-content" id="agent-expand">
-          <div class="category-grid">
-            <div class="category-card">
-              <div class="cat-icon ai">📝</div>
-              <h3>论文翻译</h3>
-              <p class="cat-desc">经典 Agent 论文的中文全文翻译</p>
-              <ul>
-                <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/papers/surveys/li-agent-ai-survey.html" target="_blank">李飞飞 Agent AI 综述</a></li>
-                <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/papers/classics/react-paper.html" target="_blank">ReAct: Reasoning + Acting</a></li>
-                <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/papers/classics/generative-agents.html" target="_blank">Generative Agents（AI 小镇）</a></li>
-              </ul>
-            </div>
-            <div class="category-card">
-              <div class="cat-icon tools">🛠️</div>
-              <h3>框架 & 教程</h3>
-              <p class="cat-desc">框架对比、工程实践、大咖教程</p>
-              <ul>
-                <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/frameworks/comparison.html" target="_blank">框架对比与选型指南</a></li>
-                <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/tutorials/building-effective-agents.html" target="_blank">Building Effective Agents</a></li>
-                <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/tutorials/chip-huyen-agents.html" target="_blank">Agents — Chip Huyen</a></li>
-                <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/tutorials/lilian-weng-llm-agent.html" target="_blank">LLM Powered Autonomous Agents</a></li>
-              </ul>
-            </div>
-            <div class="category-card">
-              <div class="cat-icon ref">📖</div>
-              <h3>参考</h3>
-              <p class="cat-desc">术语表 & 系统学习路线</p>
-              <ul>
-                <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/glossary/glossary.html" target="_blank">术语表</a></li>
-                <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/references/learning-path.html" target="_blank">学习路线</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    <div class="category-grid">
+      <div class="category-card">
+        <div class="cat-icon purple">📝</div>
+        <h3>论文翻译</h3>
+        <p class="cat-desc">经典 Agent 论文的中文全文翻译</p>
+        <ul>
+          <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/papers/surveys/li-agent-ai-survey.html">李飞飞 Agent AI 综述</a></li>
+          <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/papers/classics/react-paper.html">ReAct: Reasoning + Acting</a></li>
+          <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/papers/classics/generative-agents.html">Generative Agents（AI 小镇）</a></li>
+        </ul>
+      </div>
+      <div class="category-card">
+        <div class="cat-icon slate">🛠️</div>
+        <h3>框架 & 教程</h3>
+        <p class="cat-desc">框架对比、工程实践、大咖教程</p>
+        <ul>
+          <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/frameworks/comparison.html">框架对比与选型指南</a></li>
+          <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/tutorials/building-effective-agents.html">Building Effective Agents</a></li>
+          <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/tutorials/chip-huyen-agents.html">Agents &mdash; Chip Huyen</a></li>
+          <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/tutorials/lilian-weng-llm-agent.html">LLM Powered Autonomous Agents</a></li>
+        </ul>
+      </div>
+      <div class="category-card">
+        <div class="cat-icon cyan">📖</div>
+        <h3>参考</h3>
+        <p class="cat-desc">术语表与系统学习路线</p>
+        <ul>
+          <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/glossary/glossary.html">术语表</a></li>
+          <li><a href="https://zhongweidee.github.io/ai-agent-knowledge/references/learning-path.html">学习路线</a></li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!--  VS Code 中文文档                                              -->
-  <!-- ============================================================ -->
-  <section id="vscode" style="margin-bottom: 64px;">
-    <div class="section-header">
-      <div class="section-label">Project 02</div>
-      <div class="section-title">VS Code 中文文档</div>
+  <!-- ======================================== -->
+  <!--  VS Code 中文文档                         -->
+  <!-- ======================================== -->
+  <section id="vscode" class="section-space">
+    <div class="section-label">Project 02</div>
+    <div class="section-title">VS Code 中文文档</div>
+
+    <div class="project-intro">
+      <div class="project-icon vscode">💻</div>
+      <div class="project-info">
+        <h2><a href="https://zhongweidee.github.io/vscode-docs-zh/">VS Code 中文文档</a></h2>
+        <p class="desc">Visual Studio Code 官方文档的完整中文翻译。覆盖 AI Agent 编程、编辑器操作、编程语言、远程开发、容器化等全部功能模块，是 VS Code 深度用户的一站式中文参考。</p>
+        <div class="meta">
+          <span>📄 300+ 篇文章</span>
+          <span>📦 20+ 个分类</span>
+          <span>🔄 跟进官方更新</span>
+        </div>
+        <div style="margin-top:8px">
+          <span class="pill">AI Agent</span>
+          <span class="pill blue">编辑器</span>
+          <span class="pill green">Python</span>
+          <span class="pill amber">远程开发</span>
+          <span class="pill">容器</span>
+        </div>
+      </div>
     </div>
 
-    <div class="project-hero">
-      <div class="project-hero-inner">
-        <div class="project-icon-wrap vscode">💻</div>
-        <div class="project-meta" style="flex:1">
-          <h2><a href="https://zhongweidee.github.io/vscode-docs-zh/" target="_blank">VS Code 中文文档</a></h2>
-          <p class="desc">Visual Studio Code 官方文档的完整中文翻译。覆盖 AI Agent 编程、编辑器操作、编程语言支持、远程开发、容器化等全部功能模块。300+ 篇文章，20+ 分类，是 VS Code 深度用户的一站式中文参考。</p>
-          <div class="meta-row">
-            <span>📄 300+ 篇</span>
-            <span>📦 20+ 分类</span>
-            <span>🔄 跟进官方更新</span>
-          </div>
-          <div style="margin-top:10px">
-            <span class="pill">AI Agent</span>
-            <span class="pill blue">编辑器</span>
-            <span class="pill green">Python</span>
-            <span class="pill amber">远程开发</span>
-            <span class="pill">容器</span>
-          </div>
-        </div>
+    <div class="category-grid">
+
+      <div class="category-card">
+        <div class="cat-icon purple">🤖</div>
+        <h3>AI Agent</h3>
+        <p class="cat-desc">AI 编程智能体</p>
+        <ul>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/agents-tutorial.html">Agents 教程</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/agents-window.html">Agents 窗口</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/chat-view.html">Chat View</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/planning.html">Planning 规划</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/memory.html">Memory 记忆</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/subagents.html">Subagents</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/best-practices.html">最佳实践</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/concepts/overview.html">核心概念</a></li>
+        </ul>
       </div>
 
-      <div class="expand-section">
-        <button class="expand-toggle" onclick="toggleSection(this,'vscode-expand')">
-          <span class="arrow">▶</span> 浏览全部章节
-        </button>
-        <div class="expand-content" id="vscode-expand">
-
-          <div class="category-grid">
-
-            <div class="category-card">
-              <div class="cat-icon ai">🤖</div>
-              <h3>AI Agent</h3>
-              <p class="cat-desc">AI 编程智能体</p>
-              <ul>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/agents-tutorial.html" target="_blank">Agents 教程</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/agents-window.html" target="_blank">Agents 窗口</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/chat-view.html" target="_blank">Chat View</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/planning.html" target="_blank">Planning 规划</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/memory.html" target="_blank">Memory 记忆</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/subagents.html" target="_blank">Subagents</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/best-practices.html" target="_blank">最佳实践</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agents/concepts/overview.html" target="_blank">核心概念</a></li>
-              </ul>
-            </div>
-
-            <div class="category-card">
-              <div class="cat-icon setup">🔧</div>
-              <h3>Agent 定制</h3>
-              <p class="cat-desc">自定义 AI 工作流</p>
-              <ul>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/overview.html" target="_blank">概述</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/custom-instructions.html" target="_blank">自定义指令</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/agent-skills.html" target="_blank">Agent Skills</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/custom-agents.html" target="_blank">自定义 Agent</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/mcp-servers.html" target="_blank">MCP 服务器</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/hooks.html" target="_blank">Hooks</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/prompt-files.html" target="_blank">Prompt Files</a></li>
-              </ul>
-            </div>
-
-            <div class="category-card">
-              <div class="cat-icon edit">💬</div>
-              <h3>Chat & 编辑</h3>
-              <p class="cat-desc">聊天交互与代码编辑</p>
-              <ul>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/chat/chat-overview.html" target="_blank">Chat 概述</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/chat/inline-chat.html" target="_blank">Inline Chat</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/chat/chat-tools.html" target="_blank">Chat Tools</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/editing/codebasics.html" target="_blank">基础编辑</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/editing/intellisense.html" target="_blank">IntelliSense</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/editing/refactoring.html" target="_blank">重构</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/editing/ai-powered-suggestions.html" target="_blank">AI 内联建议</a></li>
-              </ul>
-            </div>
-
-            <div class="category-card">
-              <div class="cat-icon setup">⚙️</div>
-              <h3>配置</h3>
-              <p class="cat-desc">个性化 VS Code</p>
-              <ul>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/settings.html" target="_blank">设置</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/keybindings.html" target="_blank">键盘快捷键</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/themes.html" target="_blank">主题</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/extensions/extensions.html" target="_blank">扩展管理</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/profiles.html" target="_blank">Profiles</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/command-line.html" target="_blank">命令行</a></li>
-              </ul>
-            </div>
-
-            <div class="category-card">
-              <div class="cat-icon remote">🌐</div>
-              <h3>远程开发</h3>
-              <p class="cat-desc">SSH · 容器 · WSL · 隧道</p>
-              <ul>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/ssh.html" target="_blank">SSH</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/dev-containers.html" target="_blank">Dev Containers</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/wsl.html" target="_blank">WSL</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/codespaces.html" target="_blank">Codespaces</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/tunnels.html" target="_blank">Tunnels</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/vscode-server.html" target="_blank">VS Code Server</a></li>
-              </ul>
-            </div>
-
-            <div class="category-card">
-              <div class="cat-icon lang">🐍</div>
-              <h3>编程语言</h3>
-              <p class="cat-desc">主流语言开发指南</p>
-              <ul>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/python/python-tutorial.html" target="_blank">Python</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/nodejs/nodejs-tutorial.html" target="_blank">Node.js</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/typescript/typescript-tutorial.html" target="_blank">TypeScript</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/java/java-tutorial.html" target="_blank">Java</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/cpp/introvideos-cpp.html" target="_blank">C++</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/csharp/get-started.html" target="_blank">C#</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/languages/rust.html" target="_blank">Rust</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/languages/go.html" target="_blank">Go</a></li>
-              </ul>
-            </div>
-
-            <div class="category-card">
-              <div class="cat-icon tools">📦</div>
-              <h3>容器 & 数据科学</h3>
-              <p class="cat-desc">Docker · Notebook · 智能应用</p>
-              <ul>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/containers/overview.html" target="_blank">Docker 容器</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/datascience/overview.html" target="_blank">数据科学</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/datascience/jupyter-notebooks.html" target="_blank">Jupyter Notebooks</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/intelligentapps/overview.html" target="_blank">Foundry Toolkit</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/devcontainers/containers.html" target="_blank">Dev Containers 指南</a></li>
-              </ul>
-            </div>
-
-            <div class="category-card">
-              <div class="cat-icon ref">📋</div>
-              <h3>更多</h3>
-              <p class="cat-desc">源码管理 · 终端 · 调试 · 博客</p>
-              <ul>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/sourcecontrol/overview.html" target="_blank">Git 源码管理</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/terminal/getting-started.html" target="_blank">终端</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/debugtest/debugging.html" target="_blank">调试</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/azure/overview.html" target="_blank">Azure</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/blogs/2026/03/05/making-agents-practical-for-real-world-development.html" target="_blank">博客: Making Agents Practical</a></li>
-                <li><a href="https://zhongweidee.github.io/vscode-docs-zh/release-notes/v1_125.html" target="_blank">发行说明</a></li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
+      <div class="category-card">
+        <div class="cat-icon blue">🔧</div>
+        <h3>Agent 定制</h3>
+        <p class="cat-desc">自定义 AI 工作流</p>
+        <ul>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/overview.html">概述</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/custom-instructions.html">自定义指令</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/agent-skills.html">Agent Skills</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/custom-agents.html">自定义 Agent</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/mcp-servers.html">MCP 服务器</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/hooks.html">Hooks</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/agent-customization/prompt-files.html">Prompt Files</a></li>
+        </ul>
       </div>
+
+      <div class="category-card">
+        <div class="cat-icon cyan">💬</div>
+        <h3>Chat & 编辑</h3>
+        <p class="cat-desc">聊天交互与代码编辑</p>
+        <ul>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/chat/chat-overview.html">Chat 概述</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/chat/inline-chat.html">Inline Chat</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/chat/chat-tools.html">Chat Tools</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/editing/codebasics.html">基础编辑</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/editing/intellisense.html">IntelliSense</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/editing/refactoring.html">重构</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/editing/ai-powered-suggestions.html">AI 内联建议</a></li>
+        </ul>
+      </div>
+
+      <div class="category-card">
+        <div class="cat-icon blue">⚙️</div>
+        <h3>配置</h3>
+        <p class="cat-desc">个性化 VS Code</p>
+        <ul>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/settings.html">设置</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/keybindings.html">键盘快捷键</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/themes.html">主题</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/extensions/extensions.html">扩展管理</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/profiles.html">Profiles</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/configure/command-line.html">命令行</a></li>
+        </ul>
+      </div>
+
+      <div class="category-card">
+        <div class="cat-icon green">🌐</div>
+        <h3>远程开发</h3>
+        <p class="cat-desc">SSH · 容器 · WSL · 隧道</p>
+        <ul>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/ssh.html">SSH</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/dev-containers.html">Dev Containers</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/wsl.html">WSL</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/codespaces.html">Codespaces</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/tunnels.html">Tunnels</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/remote/vscode-server.html">VS Code Server</a></li>
+        </ul>
+      </div>
+
+      <div class="category-card">
+        <div class="cat-icon amber">🐍</div>
+        <h3>编程语言</h3>
+        <p class="cat-desc">主流语言开发指南</p>
+        <ul>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/python/python-tutorial.html">Python</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/nodejs/nodejs-tutorial.html">Node.js</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/typescript/typescript-tutorial.html">TypeScript</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/java/java-tutorial.html">Java</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/cpp/introvideos-cpp.html">C++</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/csharp/get-started.html">C#</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/languages/rust.html">Rust</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/languages/go.html">Go</a></li>
+        </ul>
+      </div>
+
+      <div class="category-card">
+        <div class="cat-icon slate">📦</div>
+        <h3>容器 & 数据科学</h3>
+        <p class="cat-desc">Docker · Notebook · 智能应用</p>
+        <ul>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/containers/overview.html">Docker 容器</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/datascience/overview.html">数据科学</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/datascience/jupyter-notebooks.html">Jupyter Notebooks</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/intelligentapps/overview.html">Foundry Toolkit</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/devcontainers/containers.html">Dev Containers 指南</a></li>
+        </ul>
+      </div>
+
+      <div class="category-card">
+        <div class="cat-icon purple">📋</div>
+        <h3>更多</h3>
+        <p class="cat-desc">源码管理 · 终端 · 调试 · 博客</p>
+        <ul>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/sourcecontrol/overview.html">Git 源码管理</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/terminal/getting-started.html">终端</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/debugtest/debugging.html">调试</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/docs/azure/overview.html">Azure</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/blogs/2026/03/05/making-agents-practical-for-real-world-development.html">博客: Making Agents Practical</a></li>
+          <li><a href="https://zhongweidee.github.io/vscode-docs-zh/release-notes/v1_125.html">发行说明</a></li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
 </main>
 
-<footer>
-  <div class="footer-divider"></div>
-  <p>Built with care · Powered by <a href="https://pages.github.com/">GitHub Pages</a></p>
+<footer class="footer">
+  <div class="footer-line"></div>
+  <p>Built with care &middot; Powered by <a href="https://pages.github.com/">GitHub Pages</a></p>
 </footer>
 
-<script>
-function toggleSection(btn, targetId) {
-  var content = document.getElementById(targetId);
-  var isOpen = content.classList.contains('show');
-  content.classList.toggle('show');
-  if (isOpen) {
-    btn.classList.remove('open');
-  } else {
-    btn.classList.add('open');
-  }
-}
-</script>
 </body>
 </html>
